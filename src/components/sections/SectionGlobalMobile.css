@@ -1,0 +1,13 @@
+/* =========================================
+   MOBILE STYLES FOR SECTIONS
+   ========================================= */
+@media (max-width: 768px) {
+  section {
+    padding: 50px 0;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+}

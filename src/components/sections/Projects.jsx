@@ -30,7 +30,7 @@ export default function Projects() {
 
   return (
     <section id="projects" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Featured Projects</h2>
+      <h2 className="sectionTitle">Featured Projects</h2>
       
       <div className={styles.grid}>
         {projects.map((project, idx) => (

@@ -7,7 +7,7 @@ export default function Certifications() {
 
   return (
     <section id="certifications" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Certifications & Workshops</h2>
+      <h2 className="sectionTitle">Certifications & Workshops</h2>
       
       <div className={styles.container}>
         <div className={`${styles.item} stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '0ms' }}>

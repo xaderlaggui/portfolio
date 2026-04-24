@@ -1,0 +1,12 @@
+/* =========================================
+   WEB (DESKTOP) STYLES FOR SECTIONS
+   ========================================= */
+section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}

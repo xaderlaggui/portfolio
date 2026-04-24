@@ -7,7 +7,7 @@ export default function About() {
 
   return (
     <section id="about" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>About Me</h2>
+      <h2 className="sectionTitle">About Me</h2>
       
       <div className={styles.content}>
         <div className={`${styles.item} stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '0ms' }}>

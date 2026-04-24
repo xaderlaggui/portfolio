@@ -1,0 +1,53 @@
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 30px 15px 20px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stickyContent {
+    position: static;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .profileWrapper {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1px;
+  }
+
+  .title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1px;
+  }
+
+  .location {
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .contactLinks {
+    gap: 6.5px;
+  }
+
+  .link {
+    font-size: 0.6rem;
+    font-weight: 400;
+    word-break: break-word;
+  }
+}

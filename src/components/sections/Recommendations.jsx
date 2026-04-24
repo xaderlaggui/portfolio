@@ -9,7 +9,7 @@ export default function Recommendations({ items = [] }) {
 
   return (
     <section id="recommendations" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Recommendations</h2>
+      <h2 className="sectionTitle">Recommendations</h2>
       <div className={styles.container}>
         {items.map((item, idx) => (
           <blockquote 

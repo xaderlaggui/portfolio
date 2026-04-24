@@ -11,6 +11,10 @@ import Recommendations from './components/sections/Recommendations';
 import Gallery from './components/sections/Gallery';
 import styles from './App.module.css';
 
+// Global Section Styles
+import './components/sections/SectionGlobal.css';
+import './components/sections/SectionGlobalMobile.css';
+
 function App() {
   const [isDark, setIsDark] = useState(() => {
     // Check localStorage first

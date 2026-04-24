@@ -1,3 +1,6 @@
+/* =========================================
+   WEB (DESKTOP) STYLES
+   ========================================= */
 .sidebar {
   padding: 80px 24px;
   border-right: 1px solid var(--border);
@@ -19,15 +22,7 @@
   object-fit: cover;
 }
 
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.1);
-  }
 
-  100% {
-    box-shadow: 0 0 0 15px rgba(17, 17, 17, 0);
-  }
-}
 
 .info {
   opacity: 0;
@@ -41,7 +36,7 @@
 }
 
 .name {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin-bottom: 5px;
 }
 
@@ -72,53 +67,4 @@
 .link:hover {
   color: var(--text-sec);
 }
-
-@media (max-width: 768px) {
-  .sidebar {
-    padding: 40px 24px 32px;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stickyContent {
-    position: static;
-    height: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .profileWrapper {
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-
-  .avatar {
-    width: 200px;
-    height: 200px;
-  }
-
-  .name {
-    font-size: 0.8 rem;
-    margin-bottom: 1px;
-  }
-
-  .title {
-    font-size: .7rem;
-    margin-bottom: 1px;
-  }
-
-  .location {
-    font-size: 0.7rem;
-    margin-bottom: 5px;
-  }
-
-  .contactLinks {
-    gap: 6.5px;
-  }
-
-  .link {
-    font-size: 0.6rem;
-    word-break: break-word;
-  }
-}
+

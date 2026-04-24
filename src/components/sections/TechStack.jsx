@@ -56,7 +56,7 @@ export default function TechStack() {
 
   return (
     <section id="skills" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Skills & Expertise</h2>
+      <h2 className="sectionTitle">Skills & Expertise</h2>
       
       <div className={styles.container}>
         {categories.map((category, idx) => (

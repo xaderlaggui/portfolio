@@ -9,7 +9,7 @@ export default function Gallery({ images = [] }) {
 
   return (
     <section id="gallery" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Gallery</h2>
+      <h2 className="sectionTitle">Gallery</h2>
       <div className={styles.masonry}>
         {images.map((img, idx) => (
           <div 

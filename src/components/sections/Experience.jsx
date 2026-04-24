@@ -7,7 +7,7 @@ export default function Experience() {
 
   return (
     <section id="education" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className={styles.sectionTitle}>Education</h2>
+      <h2 className="sectionTitle">Education</h2>
       
       <div className={styles.timeline}>
         <div className={`${styles.item} stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '0ms' }}>
