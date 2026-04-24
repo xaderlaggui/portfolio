@@ -42,13 +42,13 @@
 
 .name {
   font-size: 2rem;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .title {
   font-size: 1.1rem;
   color: var(--text-sec);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .location {
@@ -104,17 +104,17 @@
   }
 
   .title {
-    font-size: 0.6rem;
+    font-size: .7rem;
     margin-bottom: 1px;
   }
 
   .location {
-    font-size: 0.85rem;
-    margin-bottom: 7px;
+    font-size: 0.7rem;
+    margin-bottom: 5px;
   }
 
   .contactLinks {
-    gap: 5px;
+    gap: 6.5px;
   }
 
   .link {
