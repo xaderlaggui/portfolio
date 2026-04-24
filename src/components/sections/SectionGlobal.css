@@ -10,3 +10,257 @@ section {
   font-size: 1.5rem;
   margin-bottom: 40px;
 }
+
+/* =========================================
+   ABOUT SECTION (#about)
+   ========================================= */
+#about .content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#about .item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#about .item p {
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   CERTIFICATIONS SECTION (#certifications)
+   ========================================= */
+#certifications .container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#certifications .item {
+  padding-left: 20px;
+  border-left: 2px solid var(--border);
+}
+
+#certifications .item h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#certifications .item p {
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* =========================================
+   EXPERIENCE / EDUCATION SECTION (#education)
+   ========================================= */
+#education .timeline {
+  position: relative;
+  padding-left: 24px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+#education .item {
+  position: relative;
+}
+
+#education .item::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--bg);
+  border: 1px solid var(--text-sec);
+}
+
+#education .item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+#education .period {
+  font-size: 0.85rem;
+  color: var(--text-sec);
+  margin-bottom: 12px;
+  font-weight: 300;
+}
+
+#education .description,
+#education .list {
+  font-size: 0.95rem;
+}
+
+#education .list {
+  margin-top: 12px;
+  padding-left: 16px;
+  list-style-type: none;
+}
+
+#education .list li::before {
+  content: '- ';
+  color: var(--text-sec);
+}
+
+/* =========================================
+   PROJECTS SECTION (#projects)
+   ========================================= */
+#projects .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+#projects .item {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+#projects .item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+#projects .item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+#projects .stack {
+  font-size: 0.8rem;
+  color: var(--text-sec);
+  margin-bottom: 16px;
+  font-family: monospace;
+}
+
+#projects .desc {
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   TECH STACK SECTION (#skills)
+   ========================================= */
+#skills .container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#skills .category h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: var(--text-pri);
+}
+
+#skills .list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+}
+
+#skills .pill {
+  font-size: 0.9rem;
+  color: var(--text-pri);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background-color: var(--bg);
+  transition: all 0.3s ease;
+}
+
+#skills .pill:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--text-sec);
+}
+
+#skills .icon {
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+body.dark #skills .icon {
+  filter: grayscale(100%) invert(100%) brightness(200%);
+}
+
+#skills .pill:hover .icon {
+  filter: grayscale(0%);
+}
+
+body.dark #skills .pill:hover .icon {
+  filter: grayscale(0%);
+}
+
+/* =========================================
+   RECOMMENDATIONS SECTION (#recommendations)
+   ========================================= */
+#recommendations .container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+#recommendations .quote {
+  border-left: 2px solid var(--text-sec);
+  padding-left: 24px;
+}
+
+#recommendations .text {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 16px;
+  color: var(--text-pri);
+}
+
+#recommendations .author {
+  display: flex;
+  flex-direction: column;
+}
+
+#recommendations .name {
+  font-weight: 500;
+  color: var(--text-pri);
+}
+
+#recommendations .role {
+  font-size: 0.85rem;
+  color: var(--text-sec);
+}
+
+/* =========================================
+   GALLERY SECTION (#gallery)
+   ========================================= */
+#gallery .masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 10px;
+  gap: 16px;
+}
+
+#gallery .item {
+  border-radius: 4px;
+  overflow: hidden;
+  grid-row-end: span 20;
+}
+
+#gallery .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+#gallery .item:hover img {
+  transform: scale(1.05);
+}

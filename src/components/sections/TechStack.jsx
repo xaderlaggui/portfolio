@@ -1,6 +1,5 @@
 import React from 'react';
 import { useInView } from '../../hooks/useInView';
-import styles from './TechStack.module.css';
 
 const getIconSlug = (name) => {
   const map = {
@@ -58,23 +57,23 @@ export default function TechStack() {
     <section id="skills" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
       <h2 className="sectionTitle">Skills & Expertise</h2>
       
-      <div className={styles.container}>
+      <div className="container">
         {categories.map((category, idx) => (
           <div 
             key={category.title} 
-            className={`${styles.category} stagger-item ${inView ? 'active' : ''}`}
+            className={`category stagger-item ${inView ? 'active' : ''}`}
             style={{ transitionDelay: `${idx * 100}ms` }}
           >
             <h3>{category.title}</h3>
-            <ul className={styles.list}>
+            <ul className="list">
               {category.skills.map((skill) => (
-                <li key={skill} className={styles.pill}>
+                <li key={skill} className="pill">
                   <img 
                     src={`https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${getIconSlug(skill)}.svg`} 
                     width="18" 
                     height="18" 
                     alt={skill} 
-                    className={styles.icon}
+                    className="icon"
                     onError={(e) => { e.target.style.display = 'none'; }}
                   />
                   <span>{skill}</span>

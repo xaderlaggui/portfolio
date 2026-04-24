@@ -1,6 +1,5 @@
 import React from 'react';
 import { useInView } from '../../hooks/useInView';
-import styles from './Projects.module.css';
 
 export default function Projects() {
   const { ref, inView } = useInView();
@@ -32,16 +31,16 @@ export default function Projects() {
     <section id="projects" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
       <h2 className="sectionTitle">Featured Projects</h2>
       
-      <div className={styles.grid}>
+      <div className="grid">
         {projects.map((project, idx) => (
           <div 
             key={project.title} 
-            className={`${styles.item} stagger-item ${inView ? 'active' : ''}`}
+            className={`item stagger-item ${inView ? 'active' : ''}`}
             style={{ transitionDelay: `${idx * 100}ms` }}
           >
             <h3>{project.title}</h3>
-            <p className={styles.stack}>{project.stack}</p>
-            <p className={styles.desc}>{project.desc}</p>
+            <p className="stack">{project.stack}</p>
+            <p className="desc">{project.desc}</p>
           </div>
         ))}
       </div>
