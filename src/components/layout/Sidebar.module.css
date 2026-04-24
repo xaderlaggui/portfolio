@@ -85,7 +85,7 @@
     height: auto;
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 10px;
   }
 
   .profileWrapper {
@@ -94,8 +94,8 @@
   }
 
   .avatar {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
   }
 
   .name {
