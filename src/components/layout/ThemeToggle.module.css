@@ -1,0 +1,28 @@
+.toggleBtn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-pri);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggleBtn:hover {
+  transform: scale(1.1);
+  background: var(--hover-bg);
+}
+
+.toggleBtn svg {
+  width: 20px;
+  height: 20px;
+}
