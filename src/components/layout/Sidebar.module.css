@@ -108,6 +108,11 @@
     flex-shrink: 0;
   }
 
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
   .name {
     font-size: 1.5rem;
     margin-bottom: 4px;
