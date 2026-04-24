@@ -90,7 +90,7 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    padding: 60px 24px 40px;
+    padding: 40px 24px 32px;
     border-right: none;
     border-bottom: 1px solid var(--border);
   }
@@ -98,5 +98,37 @@
   .stickyContent {
     position: static;
     height: auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .profileWrapper {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .name {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .location {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .contactLinks {
+    gap: 8px;
+  }
+
+  .link {
+    font-size: 0.85rem;
+    word-break: break-word;
   }
 }
