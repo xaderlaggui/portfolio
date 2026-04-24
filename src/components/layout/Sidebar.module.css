@@ -109,31 +109,31 @@
   }
 
   .avatar {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
 
   .name {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
+    font-size: 0.8 rem;
+    margin-bottom: 1px;
   }
 
   .title {
-    font-size: 1rem;
-    margin-bottom: 2px;
+    font-size: 0.6rem;
+    margin-bottom: 1px;
   }
 
   .location {
     font-size: 0.85rem;
-    margin-bottom: 12px;
+    margin-bottom: 7px;
   }
 
   .contactLinks {
-    gap: 8px;
+    gap: 5px;
   }
 
   .link {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
     word-break: break-word;
   }
 }
