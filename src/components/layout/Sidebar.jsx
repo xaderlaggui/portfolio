@@ -43,6 +43,9 @@ export default function Sidebar() {
             <a href="https://github.com/xaderlaggui" target="_blank" rel="noopener noreferrer" className={cx('link')}>
               GitHub
             </a>
+            <a href="/Laggui_Xader_Resume.pdf" target="_blank" rel="noopener noreferrer" className={cx('link')}>
+              Curriculum Vitae
+            </a>
           </div>
         </div>
       </div>
