@@ -83,7 +83,7 @@ section {
 .cert-thumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 145px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -96,11 +96,11 @@ section {
 }
 
 .cert-thumb-iframe {
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: 150%;
   border: none;
   pointer-events: none;
-  transform: scale(1);
+  transform: scale(0.667);
   transform-origin: top left;
 }
 
@@ -259,33 +259,58 @@ section {
   }
 }
 
-/* Modal header */
+/* Modal header — nav arrows flank the title, close is far right */
 .cert-modal-header {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--border);
+  align-items: center;
   gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .cert-modal-meta {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+  text-align: center;
 }
 
 .cert-modal-issuer {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--text-sec);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
 .cert-modal-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--text-pri);
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cert-modal-nav {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-pri);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.cert-modal-nav:hover {
+  background: var(--hover-bg);
 }
 
 .cert-modal-close {
@@ -308,7 +333,7 @@ section {
   color: var(--text-pri);
 }
 
-/* Modal body */
+/* Modal body — PDF fills everything below the header */
 .cert-modal-body {
   flex: 1;
   overflow: hidden;
@@ -318,37 +343,18 @@ section {
 .cert-modal-iframe {
   width: 100%;
   height: 100%;
-  min-height: 480px;
+  min-height: 500px;
   border: none;
   display: block;
 }
 
-/* Modal footer */
+/* Remove old footer styles — footer is gone */
 .cert-modal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-  border-top: 1px solid var(--border);
-}
-
-.cert-modal-nav {
-  background: none;
-  border: 1px solid var(--border);
-  color: var(--text-pri);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  transition: background 0.2s ease;
-}
-
-.cert-modal-nav:hover {
-  background: var(--hover-bg);
+  display: none;
 }
 
 .cert-modal-counter {
-  font-size: 0.85rem;
-  color: var(--text-sec);
+  display: none;
 }
 
 /* Dark mode tweaks */
@@ -374,26 +380,22 @@ body.dark .cert-thumb {
   }
 
   .cert-modal-iframe {
-    min-height: 340px;
+    min-height: 400px;
   }
 
   .cert-modal-header {
-    padding: 14px 16px 12px;
+    padding: 10px 12px;
+    gap: 8px;
   }
 
   .cert-modal-title {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
-  .cert-modal-footer {
-    padding: 10px 16px;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .cert-modal-nav {
-    padding: 5px 12px;
+  .cert-modal-nav,
+  .cert-modal-close {
+    width: 28px;
+    height: 28px;
     font-size: 0.8rem;
   }
 }

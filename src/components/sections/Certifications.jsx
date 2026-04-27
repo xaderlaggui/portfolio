@@ -39,7 +39,7 @@ const CERTIFICATES = [
   },
 ];
 
-const AUTO_SCROLL_INTERVAL = 3000;
+const AUTO_SCROLL_INTERVAL = 1500;
 
 /* ── How many cards are visible at each breakpoint ── */
 function getVisibleCount() {
@@ -301,7 +301,7 @@ export default function Certifications() {
                 >
                   <div className="cert-thumb">
                     <iframe
-                      src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                      src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&view=FitH`}
                       title={`${cert.title} preview`}
                       className="cert-thumb-iframe"
                       tabIndex={-1}
@@ -351,25 +351,40 @@ export default function Certifications() {
           aria-label="Certificate viewer"
         >
           <div className="cert-modal">
+            {/* Header: prev arrow · issuer + title · next arrow · close */}
             <div className="cert-modal-header">
+              <button
+                className="cert-modal-nav"
+                onClick={() => setModalIndex((i) => ((i - 1) + total) % total)}
+                aria-label="Previous certificate"
+              >
+                ←
+              </button>
+
               <div className="cert-modal-meta">
                 <span className="cert-modal-issuer">{CERTIFICATES[modalIndex].issuer}</span>
                 <h3 className="cert-modal-title">{CERTIFICATES[modalIndex].title}</h3>
               </div>
+
+              <button
+                className="cert-modal-nav"
+                onClick={() => setModalIndex((i) => (i + 1) % total)}
+                aria-label="Next certificate"
+              >
+                →
+              </button>
+
               <button className="cert-modal-close" onClick={closeModal} aria-label="Close modal">✕</button>
             </div>
+
+            {/* PDF — fills all remaining height, no browser toolbars */}
             <div className="cert-modal-body">
               <iframe
                 key={modalIndex}
-                src={CERTIFICATES[modalIndex].pdf}
+                src={`${CERTIFICATES[modalIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&view=Fit`}
                 title={CERTIFICATES[modalIndex].title}
                 className="cert-modal-iframe"
               />
-            </div>
-            <div className="cert-modal-footer">
-              <button className="cert-modal-nav" onClick={() => setModalIndex((i) => ((i - 1) + total) % total)} aria-label="Previous">← Prev</button>
-              <span className="cert-modal-counter">{modalIndex + 1} / {total}</span>
-              <button className="cert-modal-nav" onClick={() => setModalIndex((i) => (i + 1) % total)} aria-label="Next">Next →</button>
             </div>
           </div>
         </div>
