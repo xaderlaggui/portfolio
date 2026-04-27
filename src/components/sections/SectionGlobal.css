@@ -31,32 +31,43 @@ section {
 
 /* =========================================
    CERTIFICATIONS SECTION (#certifications)
+   INFINITE CAROUSEL
    ========================================= */
 
-/* ── Carousel wrapper (clips the sliding track) ── */
+/* Carousel wrapper – clips the sliding track */
 .cert-carousel-wrapper {
   overflow: hidden;
   width: 100%;
   cursor: grab;
   user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y pinch-zoom;
 }
 
 .cert-carousel-wrapper:active {
   cursor: grabbing;
 }
 
-/* ── Sliding track ── */
+/*
+  Sliding track.
+  JS drives transform directly for infinite looping.
+  The .is-animating class is toggled on/off by JS:
+    - ON  when doing an animated slide
+    - OFF when doing an instant "jump" for the infinite loop reset
+*/
 .cert-track {
   display: flex;
   gap: 0;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-/* ── Individual card ── */
+.cert-track.is-animating {
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Individual card */
 .cert-card {
   flex: 0 0 calc(100% / 3);
-  /* 3 visible on desktop */
   padding: 0 12px;
   cursor: pointer;
   outline: none;
@@ -68,17 +79,11 @@ section {
   border-radius: 8px;
 }
 
-/* Inner visual box */
-.cert-card>.cert-thumb,
-.cert-card>.cert-info {
-  /* visual container is the child elements */
-}
-
-/* ── PDF Thumbnail ── */
+/* PDF Thumbnail */
 .cert-thumb {
   position: relative;
   width: 100%;
-  height: 60%;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -95,7 +100,6 @@ section {
   height: 100%;
   border: none;
   pointer-events: none;
-  /* preview only – clicks go to the card */
   transform: scale(1);
   transform-origin: top left;
 }
@@ -129,7 +133,7 @@ section {
   transform: scale(1);
 }
 
-/* ── Card text info ── */
+/* Card text info */
 .cert-info {
   padding: 14px 4px 4px;
 }
@@ -155,7 +159,7 @@ section {
   color: var(--text-sec);
 }
 
-/* ── Controls row (prev ← dots → next) ── */
+/* Controls row */
 .cert-controls {
   display: flex;
   align-items: center;
@@ -204,13 +208,14 @@ section {
   transform: scale(1.4);
 }
 
-/* ── Modal backdrop ── */
+/* Modal backdrop */
 .cert-modal-backdrop {
   position: fixed;
   inset: 0;
   z-index: 1000;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +233,7 @@ section {
   }
 }
 
-/* ── Modal box ── */
+/* Modal box */
 .cert-modal {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -303,7 +308,7 @@ section {
   color: var(--text-pri);
 }
 
-/* Modal body – PDF iframe */
+/* Modal body */
 .cert-modal-body {
   flex: 1;
   overflow: hidden;
@@ -346,24 +351,22 @@ section {
   color: var(--text-sec);
 }
 
-/* ── Dark mode tweaks ── */
+/* Dark mode tweaks */
 body.dark .cert-thumb {
   background-color: #111;
 }
 
-/* ── Responsive: tablet (2 cards) ── */
+/* Tablet: 2 cards */
 @media (max-width: 900px) {
   .cert-card {
     flex: 0 0 50%;
-    /* 2 visible */
   }
 }
 
-/* ── Responsive: mobile (1 card) ── */
+/* Mobile: 1 card */
 @media (max-width: 600px) {
   .cert-card {
     flex: 0 0 100%;
-    /* 1 visible */
   }
 
   .cert-modal {
@@ -372,6 +375,26 @@ body.dark .cert-thumb {
 
   .cert-modal-iframe {
     min-height: 340px;
+  }
+
+  .cert-modal-header {
+    padding: 14px 16px 12px;
+  }
+
+  .cert-modal-title {
+    font-size: 0.95rem;
+  }
+
+  .cert-modal-footer {
+    padding: 10px 16px;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cert-modal-nav {
+    padding: 5px 12px;
+    font-size: 0.8rem;
   }
 }
 
@@ -585,4 +608,11 @@ body.dark #skills .pill:hover .icon {
 
 #gallery .item:hover img {
   transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  #gallery .masonry {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
 }

@@ -3,12 +3,81 @@
    ========================================= */
 @media (max-width: 768px) {
   section {
-    padding: 20px 0;
+    padding: 40px 0;
   }
 
   .sectionTitle {
     font-size: 1.3rem;
     font-weight: 800;
+    margin-bottom: 24px;
+  }
+
+  /* About */
+  #about .item h3 {
+    font-size: 1rem;
+  }
+
+  #about .item p {
+    font-size: 0.9rem;
+  }
+
+  /* Education timeline – keep dot aligned */
+  #education .timeline {
+    padding-left: 20px;
+    gap: 28px;
+  }
+
+  #education .item::before {
+    left: -25px;
+    width: 8px;
+    height: 8px;
+  }
+
+  #education .item h3 {
+    font-size: 1rem;
+  }
+
+  #education .description,
+  #education .list {
+    font-size: 0.88rem;
+  }
+
+  /* Projects */
+  #projects .item h3 {
+    font-size: 1.05rem;
+  }
+
+  #projects .desc {
+    font-size: 0.88rem;
+  }
+
+  /* Skills pills – tighter on small screens */
+  #skills .list {
+    gap: 8px;
+  }
+
+  #skills .pill {
+    font-size: 0.82rem;
+    padding: 5px 10px;
+  }
+
+  /* Recommendations */
+  #recommendations .text {
+    font-size: 0.95rem;
+  }
+
+  #recommendations .quote {
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 32px 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.15rem;
     margin-bottom: 20px;
   }
 }

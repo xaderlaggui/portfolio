@@ -22,8 +22,6 @@
   object-fit: cover;
 }
 
-
-
 .info {
   opacity: 0;
   transform: translateY(10px);
@@ -67,4 +65,3 @@
 .link:hover {
   color: var(--text-sec);
 }
-
