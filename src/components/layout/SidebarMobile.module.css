@@ -22,7 +22,6 @@
     width: 160px;
     height: 160px;
     object-fit: cover;
-    flex-shrink: 0;
   }
 
   /* Right-side text block */
@@ -77,7 +76,6 @@
   .avatar {
     width: 160px;
     height: 160px;
-    flex-shrink: 0;
   }
 
   .name {
