@@ -2,71 +2,87 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useInView } from '../../hooks/useInView';
 
 const CERTIFICATES = [
-  {
-    id: 1,
-    title: 'Alibaba Masterclass',
-    issuer: 'PhilDev Foundation',
-    date: '2024',
-    img: '/1.jpg',
-  },
-  {
-    id: 2,
-    title: 'Design Thinking',
-    issuer: 'PhilDev Foundation',
-    date: '2024',
-    img: '/2.jpg',
-  },
-  {
-    id: 3,
-    title: 'Leadership & Communication',
-    issuer: 'PhilDev Foundation',
-    date: '2024',
-    img: '/3.jpg',
-  },
-  {
-    id: 4,
-    title: 'Workshop – Day 2',
-    issuer: 'PhilDev Foundation',
-    date: '2024',
-    img: '/4.jpg',
-  },
-  {
-    id: 5,
-    title: 'Workshop – Day 3',
-    issuer: 'PhilDev Foundation',
-    date: '2024',
-    img: '/5.jpg',
-  },
+  { id: 1, title: 'Alibaba Masterclass',        issuer: 'PhilDev Foundation', date: '2024', img: '/1.jpg' },
+  { id: 2, title: 'Design Thinking',             issuer: 'PhilDev Foundation', date: '2024', img: '/2.jpg' },
+  { id: 3, title: 'Leadership & Communication',  issuer: 'PhilDev Foundation', date: '2024', img: '/3.jpg' },
+  { id: 4, title: 'Workshop – Day 2',            issuer: 'PhilDev Foundation', date: '2024', img: '/4.jpg' },
+  { id: 5, title: 'Workshop – Day 3',            issuer: 'PhilDev Foundation', date: '2024', img: '/5.jpg' },
 ];
 
-/*
- * Marquee-based infinite carousel.
- * The track contains [real cards] + [duplicated real cards].
- * CSS animates translateX from 0 → -50% (exactly one full set width),
- * then loops — seamless, no JS timers needed.
- * Hovering pauses via animation-play-state.
- */
+// Detect iOS — all browsers on iPhone/iPad use WebKit
+function detectIOS() {
+  if (typeof navigator === 'undefined') return false;
+  return (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    // iPadOS 13+ reports as MacIntel with touch support
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  );
+}
 
 export default function Certifications() {
   const { ref, inView } = useInView();
 
-  /* ── modal state ── */
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  const total = CERTIFICATES.length;
+  // Refs for the RAF loop (avoid stale closures)
+  const trackRef     = useRef(null);
+  const animFrameRef = useRef(null);
+  const posRef       = useRef(0);
+  const pausedRef    = useRef(false);
+  const modalRef     = useRef(false);
+  const isIOS        = useRef(detectIOS());
 
-  /* Duplicate cards for the seamless loop */
+  const total        = CERTIFICATES.length;
   const marqueeItems = [...CERTIFICATES, ...CERTIFICATES];
 
-  /* ── modal keyboard nav ── */
+  // Keep pause/modal refs in sync with state
+  useEffect(() => { pausedRef.current = paused; },    [paused]);
+  useEffect(() => { modalRef.current  = modalOpen; }, [modalOpen]);
+
+  // ── iOS: JS-driven RAF marquee ──────────────────────────────────────────
+  useEffect(() => {
+    if (!isIOS.current) return;
+
+    const track = trackRef.current;
+    if (!track) return;
+
+    // Kill the CSS animation so JS can own the transform
+    track.style.animation       = 'none';
+    track.style.webkitAnimation = 'none';
+
+    let halfWidth = 0;
+    const SPEED = 0.5; // px / frame  (~30 px/s at 60 fps)
+
+    const animate = () => {
+      if (!pausedRef.current && !modalRef.current) {
+        // Lazy-compute half-width once the DOM has real dimensions
+        if (!halfWidth && track.scrollWidth > 0) {
+          halfWidth = track.scrollWidth / 2;
+        }
+        if (halfWidth > 0) {
+          posRef.current -= SPEED;
+          if (Math.abs(posRef.current) >= halfWidth) posRef.current = 0;
+          const t = `translate3d(${posRef.current}px, 0, 0)`;
+          track.style.webkitTransform = t;
+          track.style.transform       = t;
+        }
+      }
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, []); // run once — refs handle dynamic values
+
+  // ── Modal keyboard nav ──────────────────────────────────────────────────
   useEffect(() => {
     if (!modalOpen) return;
     const handleKey = (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape')     closeModal();
       if (e.key === 'ArrowRight') setModalIndex((i) => (i + 1) % total);
-      if (e.key === 'ArrowLeft') setModalIndex((i) => ((i - 1) + total) % total);
+      if (e.key === 'ArrowLeft')  setModalIndex((i) => ((i - 1) + total) % total);
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
@@ -77,12 +93,8 @@ export default function Certifications() {
     return () => { document.body.style.overflow = ''; };
   }, [modalOpen]);
 
-  const openModal = (index) => {
-    /* index may be from duplicated set — clamp to real range */
-    setModalIndex(index % total);
-    setModalOpen(true);
-  };
-  const closeModal = () => setModalOpen(false);
+  const openModal  = (index) => { setModalIndex(index % total); setModalOpen(true); };
+  const closeModal = ()      => setModalOpen(false);
 
   return (
     <>
@@ -98,11 +110,14 @@ export default function Certifications() {
           className="cert-marquee-outer"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={()   => setPaused(false)}
         >
           <div
+            ref={trackRef}
             className="cert-marquee-track"
             style={{
-              animationPlayState: paused || modalOpen ? 'paused' : 'running',
+              animationPlayState:       paused || modalOpen ? 'paused' : 'running',
               WebkitAnimationPlayState: paused || modalOpen ? 'paused' : 'running',
             }}
           >
@@ -154,9 +169,7 @@ export default function Certifications() {
                 className="cert-modal-nav"
                 onClick={() => setModalIndex((i) => ((i - 1) + total) % total)}
                 aria-label="Previous certificate"
-              >
-                ←
-              </button>
+              >←</button>
 
               <div className="cert-modal-meta">
                 <span className="cert-modal-issuer">{CERTIFICATES[modalIndex].issuer}</span>
@@ -167,9 +180,7 @@ export default function Certifications() {
                 className="cert-modal-nav"
                 onClick={() => setModalIndex((i) => (i + 1) % total)}
                 aria-label="Next certificate"
-              >
-                →
-              </button>
+              >→</button>
 
               <button className="cert-modal-close" onClick={closeModal} aria-label="Close modal">✕</button>
             </div>
