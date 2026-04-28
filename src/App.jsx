@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from './components/layout/Sidebar';
 import ThemeToggle from './components/layout/ThemeToggle';
 import Footer from './components/layout/Footer';
@@ -16,16 +16,15 @@ import './components/sections/SectionGlobal.css';
 import './components/sections/SectionGlobalMobile.css';
 
 function App() {
+  const avatarRef = useRef(null);
+
   const [isDark, setIsDark] = useState(() => {
-    // Check localStorage first
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
-    // Fallback to system preference
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
   useEffect(() => {
-    // Apply class to body
     if (isDark) {
       document.body.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -36,14 +35,14 @@ function App() {
   }, [isDark]);
 
   const toggleDark = () => {
-    setIsDark(!isDark);
+    setIsDark(prev => !prev);
   };
 
   return (
     <>
-      <ThemeToggle isDark={isDark} toggleDark={toggleDark} />
+      <ThemeToggle isDark={isDark} toggleDark={toggleDark} avatarRef={avatarRef} />
       <div className={styles.layout}>
-        <Sidebar />
+        <Sidebar avatarRef={avatarRef} />
         <div className={styles.mainContent}>
           <main>
             <About />

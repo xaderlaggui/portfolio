@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Sidebar.module.css';
 import mobileStyles from './SidebarMobile.module.css';
 
 const cx = (name) => `${styles[name] || ''} ${mobileStyles[name] || ''}`.trim();
 
-export default function Sidebar() {
+export default function Sidebar({ avatarRef }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,8 @@ export default function Sidebar() {
       <div className={cx('stickyContent')}>
         <div className={cx('profileWrapper')}>
           <img
-            src="/img_src/der.jpg"
+            ref={avatarRef}
+            src="/profile-frames/frame-000.jpg"
             alt="Xader Laggui"
             className={cx('avatar')}
             onError={(e) => {

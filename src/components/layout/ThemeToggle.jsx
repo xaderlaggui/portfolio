@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './ThemeToggle.module.css';
 
-export default function ThemeToggle({ isDark, toggleDark }) {
+const TOTAL_FRAMES = 138;
+const FRAME_DURATION = 16; // ~60fps
+
+export default function ThemeToggle({ isDark, toggleDark, avatarRef }) {
+  const frameRef = useRef(0);
+  const timerRef = useRef(null);
+
+  const animateFrames = (towardDark) => {
+    clearInterval(timerRef.current);
+    const target = towardDark ? TOTAL_FRAMES : 0;
+    const step = towardDark ? 1 : -1;
+
+    timerRef.current = setInterval(() => {
+      frameRef.current += step;
+      if (avatarRef?.current) {
+        const padded = String(frameRef.current).padStart(3, '0');
+        avatarRef.current.src = `/profile-frames/frame-${padded}.jpg`;
+      }
+      if (frameRef.current === target) clearInterval(timerRef.current);
+    }, FRAME_DURATION);
+  };
+
+  const handleToggle = () => {
+    toggleDark();
+    animateFrames(!isDark);
+  };
+
   return (
-    <button 
-      className={styles.toggleBtn} 
-      onClick={toggleDark}
+    <button
+      className={styles.toggleBtn}
+      onClick={handleToggle}
       aria-label="Toggle theme"
     >
       {isDark ? (

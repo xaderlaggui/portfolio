@@ -52,9 +52,9 @@
   }
 
   .location {
-    font-size: 0.75rem;
+    font-size: 0.6rem;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   .contactLinks {
@@ -65,7 +65,7 @@
   }
 
   .link {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 400;
     word-break: break-word;
     white-space: nowrap;
@@ -79,10 +79,10 @@
   }
 
   .name {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .title {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
