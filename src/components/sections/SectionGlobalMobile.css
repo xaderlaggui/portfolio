@@ -6,6 +6,16 @@
     padding: 40px 0;
   }
 
+  .cert-marquee-outer {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  }
+
+  .cert-card {
+    flex: 0 0 200px;
+  }
+
+
   .sectionTitle {
     font-size: 1.3rem;
     font-weight: 800;
@@ -109,5 +119,18 @@
   .sectionTitle {
     font-size: 1.15rem;
     margin-bottom: 20px;
+  }
+
+  .cert-marquee-outer {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .cert-card {
+    flex: 0 0 180px;
+  }
+
+  .cert-thumb {
+    height: 160px;
   }
 }
