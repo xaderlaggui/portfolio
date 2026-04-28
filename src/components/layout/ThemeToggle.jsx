@@ -4,6 +4,7 @@ import styles from './ThemeToggle.module.css';
 const TOTAL_FRAMES = 138;
 const FRAME_DURATION = 16; // ~60fps
 
+
 export default function ThemeToggle({ isDark, toggleDark, avatarRef }) {
   const frameRef = useRef(0);
   const timerRef = useRef(null);
