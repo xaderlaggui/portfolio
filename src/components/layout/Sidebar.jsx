@@ -11,13 +11,16 @@ export default function Sidebar({ avatarRef }) {
     setMounted(true);
   }, []);
 
+  const savedTheme = localStorage.getItem('theme');
+  const initialFrame = savedTheme === 'dark' ? '138' : '000';
+
   return (
     <aside className={cx('sidebar')}>
       <div className={cx('stickyContent')}>
         <div className={cx('profileWrapper')}>
           <img
             ref={avatarRef}
-            src="/profile-frames/frame-000.jpg"
+            src={`/profile-frames/frame-${initialFrame}.jpg`}
             alt="Xader Laggui"
             className={cx('avatar')}
             onError={(e) => {
