@@ -25,15 +25,15 @@
 }
 
 /* Dark mode pill — dark charcoal */
+/* --- Pill track --- */
 .pillDark {
-  background: #2c2c2c;
-  border-color: #444;
+  background: #2E2B26;
+  border-color: #4A4740;
 }
 
-/* Light mode pill — off-white */
 .pillLight {
-  background: #ebebeb;
-  border-color: #ccc;
+  background: #EDEAE5;
+  border-color: #C8C4BE;
 }
 
 /* --- Knob --- */
@@ -55,16 +55,15 @@
 /* Knob LEFT — dark mode (sun shows on dark pill) */
 .knobLeft {
   left: 3px;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: #F0EDE8;
+  color: #1C1A17;
 }
 
-/* Knob RIGHT — light mode (moon shows on light pill) */
+/* Knob RIGHT — light mode */
 .knobRight {
   left: calc(100% - 23px);
-  /* 52 - 22 - 2*2 = 26, so ~24px from right edge */
-  background: #1a1a1a;
-  color: #ffffff;
+  background: #1C1A17;
+  color: #F0EDE8;
 }
 
 /* --- Icon inside knob --- */

@@ -1,20 +1,22 @@
 /* Reset & Global */
 :root {
-  --bg: #ffffff;
-  --text-pri: #111111;
-  --text-sec: #666666;
-  --accent: #111111;
-  --border: #eaeaea;
-  --hover-bg: #f5f5f5;
+  --bg: #F7F5F2;
+  --surface: #EDEAE5;
+  --text-pri: #1C1A17;
+  --text-sec: #6B6760;
+  --accent: #1C1A17;
+  --border: #DDD9D3;
+  --hover-bg: #EDEAE5;
 }
 
 .dark {
-  --bg: #0a0a0a;
-  --text-pri: #ffffff;
-  --text-sec: #999999;
-  --accent: #ffffff;
-  --border: #222222;
-  --hover-bg: #1a1a1a;
+  --bg: #1E1C19;
+  --surface: #272420;
+  --text-pri: #F0EDE8;
+  --text-sec: #9C9891;
+  --accent: #F0EDE8;
+  --border: #33312D;
+  --hover-bg: #272420;
 }
 
 * {
