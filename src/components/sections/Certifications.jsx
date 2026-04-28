@@ -7,35 +7,35 @@ const CERTIFICATES = [
     title: 'Alibaba Masterclass',
     issuer: 'PhilDev Foundation',
     date: '2024',
-    pdf: '/[Alibaba Masterclass] Certificate of Completion.pdf',
+    img: '/1.jpg',
   },
   {
     id: 2,
     title: 'Design Thinking',
     issuer: 'PhilDev Foundation',
     date: '2024',
-    pdf: '/[Design Thinking] Certificate of Completion.pdf',
+    img: '/2.jpg',
   },
   {
     id: 3,
     title: 'Leadership & Communication',
     issuer: 'PhilDev Foundation',
     date: '2024',
-    pdf: '/[Leadership] Certificate of Completion.pdf',
+    img: '/3.jpg',
   },
   {
     id: 4,
     title: 'Workshop – Day 2',
     issuer: 'PhilDev Foundation',
     date: '2024',
-    pdf: '/[Day 2] Certificate of Completion.pdf',
+    img: '/4.jpg',
   },
   {
     id: 5,
     title: 'Workshop – Day 3',
     issuer: 'PhilDev Foundation',
     date: '2024',
-    pdf: '/[Day3] Certificate of Completion.pdf',
+    img: '/5.jpg',
   },
 ];
 
@@ -115,11 +115,10 @@ export default function Certifications() {
                 onKeyDown={(e) => e.key === 'Enter' && openModal(i)}
               >
                 <div className="cert-thumb">
-                  <iframe
-                    src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&view=FitH`}
-                    title={`${cert.title} preview`}
-                    className="cert-thumb-iframe"
-                    tabIndex={-1}
+                  <img
+                    src={cert.img}
+                    alt={`${cert.title} certificate`}
+                    className="cert-thumb-img"
                     loading="lazy"
                   />
                   <div className="cert-thumb-overlay">
@@ -132,20 +131,6 @@ export default function Certifications() {
                   <p className="cert-date">{cert.date}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Dot indicators — still useful for context */}
-        <div className="cert-controls">
-          <div className="cert-dots">
-            {CERTIFICATES.map((_, i) => (
-              <button
-                key={i}
-                className="cert-dot"
-                onClick={() => openModal(i)}
-                aria-label={`Open certificate ${i + 1}`}
-              />
             ))}
           </div>
         </div>
@@ -187,11 +172,11 @@ export default function Certifications() {
             </div>
 
             <div className="cert-modal-body">
-              <iframe
+              <img
                 key={modalIndex}
-                src={`${CERTIFICATES[modalIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&view=Fit`}
-                title={CERTIFICATES[modalIndex].title}
-                className="cert-modal-iframe"
+                src={CERTIFICATES[modalIndex].img}
+                alt={CERTIFICATES[modalIndex].title}
+                className="cert-modal-img"
               />
             </div>
           </div>
