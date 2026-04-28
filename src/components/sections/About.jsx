@@ -6,19 +6,19 @@ export default function About() {
 
   return (
     <section id="about" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
-      <h2 className="sectionTitle">About Me</h2>
-      
+      <h2 className="sectionTitle">About</h2>
+
       <div className="content">
         <div className={`item stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '0ms' }}>
           <h3>Academic Excellence</h3>
           <p>Currently pursuing a Bachelor of Science in Information Technology at Pamantasan ng Lungsod ng Pasig. Dean's List and President's List awardee, demonstrating consistent academic achievement.</p>
         </div>
-        
+
         <div className={`item stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '100ms' }}>
           <h3>Technical Passion</h3>
           <p>Passionate about web and mobile development with hands-on experience in React, React Native, TypeScript, and modern development practices. Focused on creating accessible and user-friendly applications.</p>
         </div>
-        
+
         <div className={`item stagger-item ${inView ? 'active' : ''}`} style={{ transitionDelay: '200ms' }}>
           <h3>Continuous Learner</h3>
           <p>Completed comprehensive certifications in AWS, cybersecurity, design thinking, and technopreneurship. Always eager to learn new technologies and best practices.</p>

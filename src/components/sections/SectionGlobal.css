@@ -7,8 +7,8 @@ section {
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
-  margin-bottom: 40px;
+  font-size: 1.135rem;
+  margin-bottom: 35px;
   font-weight: bold;
 }
 
@@ -26,7 +26,7 @@ section {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
 
@@ -41,12 +41,12 @@ body.dark #about .item:hover {
 }
 
 #about .item h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 8px;
 }
 
 #about .item p {
-  font-size: 0.95rem;
+  font-size: .9rem;
 }
 
 /* =========================================
@@ -443,7 +443,7 @@ body.dark .cert-thumb {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
 
@@ -476,12 +476,12 @@ body.dark #education .item:hover {
 }
 
 #education .item h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-bottom: 4px;
 }
 
 #education .period {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-sec);
   margin-bottom: 12px;
   font-weight: 300;
@@ -489,7 +489,7 @@ body.dark #education .item:hover {
 
 #education .description,
 #education .list {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 #education .list {
@@ -517,7 +517,7 @@ body.dark #education .item:hover {
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
 
@@ -532,19 +532,19 @@ body.dark #projects .item:hover {
 }
 
 #projects .item h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 8px;
 }
 
 #projects .stack {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: var(--text-sec);
   margin-bottom: 16px;
-  font-family: monospace;
+  font-family: 'Inter', sans-serif;
 }
 
 #projects .desc {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
 /* =========================================
@@ -620,7 +620,7 @@ body.dark #skills .pill:hover .icon {
   border-left: 3px solid var(--text-sec);
   border-radius: 10px;
   background: var(--bg);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
 }
 

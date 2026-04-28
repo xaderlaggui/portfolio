@@ -1,6 +1,6 @@
 @media (max-width: 768px) {
   .sidebar {
-    padding: 24px 20px 20px;
+    padding: 31px 16px 15px;
     border-right: none;
     border-bottom: 1px solid var(--border);
   }
@@ -10,7 +10,7 @@
     height: auto;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 10px;
   }
 
   .profileWrapper {
@@ -33,22 +33,29 @@
     /* allow text truncation */
   }
 
+  .nameRow {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
   .name {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
   }
 
   .title {
     font-size: 0.88rem;
     font-weight: 500;
     margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    word-break: break-word;
   }
 
   .location {
@@ -62,6 +69,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 6px 12px;
+    align-items: center;
   }
 
   .link {
@@ -79,10 +87,14 @@
   }
 
   .name {
-    font-size: 1.1rem;
+    font-size: 1.13rem;
+    white-space: normal;
+    word-break: break-word;
   }
 
   .title {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
+    white-space: normal;
+    word-break: break-word;
   }
 }

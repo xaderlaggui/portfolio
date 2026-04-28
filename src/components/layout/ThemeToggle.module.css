@@ -1,28 +1,97 @@
-.toggleBtn {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 999;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text-pri);
-  width: 44px;
-  height: 44px;
+/* ==============================================
+   ThemeToggle — pill slider, mobile-first
+   ============================================== */
+
+/* --- Pill track --- */
+.pill {
+  /* Mobile base */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 45px;
+  height: 26px;
+  border-radius: 999px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 1.5s ease, border-color 1.5s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.pill:focus-visible {
+  box-shadow: 0 0 0 3px rgba(120, 120, 120, 0.35);
+}
+
+/* Dark mode pill — dark charcoal */
+.pillDark {
+  background: #2c2c2c;
+  border-color: #444;
+}
+
+/* Light mode pill — off-white */
+.pillLight {
+  background: #ebebeb;
+  border-color: #ccc;
+}
+
+/* --- Knob --- */
+.knob {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
-.toggleBtn:hover {
-  transform: scale(1.1);
-  background: var(--hover-bg);
+/* Knob LEFT — dark mode (sun shows on dark pill) */
+.knobLeft {
+  left: 3px;
+  background: #ffffff;
+  color: #1a1a1a;
 }
 
-.toggleBtn svg {
-  width: 20px;
-  height: 20px;
+/* Knob RIGHT — light mode (moon shows on light pill) */
+.knobRight {
+  left: calc(100% - 23px);
+  /* 52 - 22 - 2*2 = 26, so ~24px from right edge */
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* --- Icon inside knob --- */
+.icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* --- Desktop scale-up --- */
+@media (min-width: 769px) {
+  .pill {
+    width: 50px;
+    height: 28px;
+  }
+
+  .knob {
+    width: 22px;
+    height: 22px;
+  }
+
+  .knobRight {
+    left: calc(100% - 23px);
+  }
+
+  .icon {
+    width: 12px;
+    height: 12px;
+  }
 }

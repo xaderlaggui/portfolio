@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Sidebar from './components/layout/Sidebar';
-import ThemeToggle from './components/layout/ThemeToggle';
 import Footer from './components/layout/Footer';
 import About from './components/sections/About';
 import Experience from './components/sections/Experience';
@@ -34,7 +33,7 @@ function App() {
     }
   }, [isDark]);
 
-const preloadedImages = [];
+  const preloadedImages = [];
 
   useEffect(() => {
     if (preloadedImages.length === 0) {
@@ -53,9 +52,8 @@ const preloadedImages = [];
 
   return (
     <>
-      <ThemeToggle isDark={isDark} toggleDark={toggleDark} avatarRef={avatarRef} />
       <div className={styles.layout}>
-        <Sidebar avatarRef={avatarRef} />
+        <Sidebar avatarRef={avatarRef} isDark={isDark} toggleDark={toggleDark} />
         <div className={styles.mainContent}>
           <main>
             <About />
