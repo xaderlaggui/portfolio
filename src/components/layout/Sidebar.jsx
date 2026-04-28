@@ -27,7 +27,7 @@ export default function Sidebar() {
 
         <div className={`${cx('info')} ${mounted ? cx('mounted') : ''}`}>
           <h1 className={cx('name')}>Xader Laggui</h1>
-          <p className={cx('title')}>Full Stack Developer | AI</p>
+          <p className={cx('title')}>Full Stack Developer | Prompt Engineer</p>
           <p className={cx('location')}>Pasig City, Philippines</p>
 
           <div className={cx('contactLinks')}>
