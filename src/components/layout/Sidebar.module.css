@@ -13,7 +13,7 @@
 }
 
 .profileWrapper {
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -73,13 +73,16 @@
 .title {
   font-size: .9rem;
   color: var(--text-sec);
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 
 .location {
   font-size: .7rem;
   color: var(--text-sec);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .contactLinks {
@@ -96,10 +99,31 @@
   color: var(--text-pri);
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .link:hover {
   color: var(--text-sec);
+}
+
+/* ── Brand icons (simple-icons CDN) — same treatment as skills pills ── */
+.brandIcon {
+  display: block;
+  flex-shrink: 0;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+:global(body.dark) .brandIcon {
+  filter: grayscale(100%) invert(100%) brightness(200%);
+}
+
+.link:hover .brandIcon {
+  filter: grayscale(0%);
+}
+
+:global(body.dark) .link:hover .brandIcon {
+  filter: grayscale(0%);
 }

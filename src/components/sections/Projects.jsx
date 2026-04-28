@@ -8,33 +8,33 @@ export default function Projects() {
     {
       title: 'CGG Loaning System',
       stack: 'Laravel • Next.js • Laragon • MySQL • Tailwind CSS',
-      desc: 'A loaning system for Comfac Global Group where the members and non-members of the company can use.'
+      desc: 'Developed a loaning system for Comfac Global Group using Laravel and Next.js to streamline loan applications for both members and non-members. The platform features a structured workflow for submitting, reviewing, and approving requests, combined with a responsive and user-friendly interface. It ensures secure data handling, real-time updates, and scalable performance while addressing practical business needs.'
     },
     {
       title: 'SmartVision',
       stack: 'TypeScript • Python • React Native • PostgreSQL',
-      desc: 'Braille interpretation mobile app for visually impaired students using machine learning to interpret Braille characters. Integrated PostgreSQL for secure storage of user data and activity logs.'
+      desc: 'Developed SmartVision, a mobile application designed to assist visually impaired students by interpreting Braille characters using machine learning. Built with React Native for cross-platform accessibility, the app integrates a Python-based ML model for accurate recognition and PostgreSQL for secure storage of user data and activity logs..'
     },
     {
       title: 'QuickReserve',
       stack: 'JavaScript • TypeScript • React • MySQL • Tailwind CSS',
-      desc: 'Pet hospital appointment and scheduling system with full CRUD functionality. Built using modern JavaScript practices to enhance code reliability, maintainability, and user experience.'
+      desc: 'Developed QuickReserve, a pet hospital appointment and scheduling system with full CRUD functionality. Built using modern JavaScript and TypeScript practices, the platform provides a reliable and maintainable solution with a clean, responsive interface, improving both operational efficiency and user experience.'
     },
     {
       title: 'Barangay Bambang Information System',
       stack: 'HTML • CSS • PHP • Bootstrap • MySQL',
-      desc: 'Lost and Found module for barangay information system with full CRUD functionality and responsive interface for efficient item management and data access.'
+      desc: 'Developed a Lost and Found module for the Barangay Bambang Information System, featuring full CRUD functionality and a responsive interface for efficient item tracking and data management.'
     }
   ];
 
   return (
     <section id="projects" ref={ref} className={`reveal ${inView ? 'active' : ''}`}>
       <h2 className="sectionTitle">Featured Projects</h2>
-      
+
       <div className="grid">
         {projects.map((project, idx) => (
-          <div 
-            key={project.title} 
+          <div
+            key={project.title}
             className={`item stagger-item ${inView ? 'active' : ''}`}
             style={{ transitionDelay: `${idx * 100}ms` }}
           >

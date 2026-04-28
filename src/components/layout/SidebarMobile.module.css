@@ -1,8 +1,7 @@
 @media (max-width: 768px) {
   .sidebar {
-    padding: 31px 16px 15px;
+    padding: 31px 16px 5px;
     border-right: none;
-    border-bottom: 1px solid var(--border);
   }
 
   .stickyContent {
@@ -39,9 +38,9 @@
   }
 
   .name {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
@@ -49,9 +48,9 @@
   }
 
   .title {
-    font-size: 0.88rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
@@ -61,7 +60,7 @@
   .location {
     font-size: 0.6rem;
     font-weight: 400;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
   }
 
   .contactLinks {
@@ -87,14 +86,85 @@
   }
 
   .name {
-    font-size: 1.13rem;
+    font-size: 1.147rem;
     white-space: normal;
     word-break: break-word;
   }
 
+  .title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    /* easiest approach — no need for :not(:last-child) */
+  }
+
   .title {
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     white-space: normal;
     word-break: break-word;
+    margin-top: -7px;
+  }
+
+  .title:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  .location {
+    font-size: 0.65rem;
+    margin-top: 2px;
+  }
+
+  .link {
+    font-size: 0.6rem;
+  }
+
+  .contactLinks {
+    gap: 5.3px;
+  }
+}
+
+@media (max-width: 370px) {
+  .avatar {
+    width: 150px;
+    height: 150px;
+  }
+
+  .name {
+    font-size: 1rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    /* easiest approach — no need for :not(:last-child) */
+  }
+
+  .title {
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: break-word;
+    margin-top: -7px;
+  }
+
+  .title:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  .location {
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+
+  .link {
+    font-size: 0.57rem;
+  }
+
+  .contactLinks {
+    gap: 5.3px;
   }
 }

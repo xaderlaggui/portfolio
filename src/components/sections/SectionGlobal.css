@@ -2,19 +2,23 @@
    WEB (DESKTOP) STYLES FOR SECTIONS
    ========================================= */
 section {
-  padding: 80px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 50px 0;
 }
 
 .sectionTitle {
-  font-size: 1.135rem;
-  margin-bottom: 35px;
+  font-size: 1.235rem;
+  margin-bottom: 20px;
   font-weight: bold;
 }
 
 /* =========================================
    ABOUT SECTION (#about)
    ========================================= */
+
+#about {
+  margin-top: 60px;
+}
+
 #about .content {
   display: flex;
   flex-direction: column;
@@ -42,7 +46,7 @@ body.dark #about .item:hover {
 
 #about .item h3 {
   font-size: 1rem;
-  margin-bottom: 8px;
+  margin-bottom: 1px;
 }
 
 #about .item p {
@@ -56,12 +60,25 @@ body.dark #about .item:hover {
 
 /* ── Marquee keyframe ── */
 @-webkit-keyframes marquee {
-  from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
-  to   { -webkit-transform: translate3d(-50%, 0, 0); transform: translate3d(-50%, 0, 0); }
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+  }
 }
+
 @keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* ── Outer wrapper: clips track + edge fade ── */
@@ -288,7 +305,6 @@ body.dark #about .item:hover {
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
