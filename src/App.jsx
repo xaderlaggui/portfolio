@@ -34,11 +34,16 @@ function App() {
     }
   }, [isDark]);
 
+const preloadedImages = [];
+
   useEffect(() => {
-    for (let i = 0; i <= 138; i++) {
-      const img = new Image();
-      const padded = String(i).padStart(3, '0');
-      img.src = `/profile-frames/frame-${padded}.jpg`;
+    if (preloadedImages.length === 0) {
+      for (let i = 0; i <= 138; i++) {
+        const img = new Image();
+        const padded = String(i).padStart(3, '0');
+        img.src = `/profile-frames/frame-${padded}.jpg`;
+        preloadedImages.push(img);
+      }
     }
   }, []);
 

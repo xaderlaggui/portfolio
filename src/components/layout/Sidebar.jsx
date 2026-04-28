@@ -11,8 +11,11 @@ export default function Sidebar({ avatarRef }) {
     setMounted(true);
   }, []);
 
-  const savedTheme = localStorage.getItem('theme');
-  const initialFrame = savedTheme === 'dark' ? '138' : '000';
+  const [initialFrame] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    const isDarkMode = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return isDarkMode ? '138' : '000';
+  });
 
   return (
     <aside className={cx('sidebar')}>

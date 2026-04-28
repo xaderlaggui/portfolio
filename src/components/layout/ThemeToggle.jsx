@@ -6,7 +6,7 @@ const FRAME_DURATION = 16; // ~60fps
 
 
 export default function ThemeToggle({ isDark, toggleDark, avatarRef }) {
-  const frameRef = useRef(localStorage.getItem('theme') === 'dark' ? 138 : 0);
+  const frameRef = useRef(isDark ? 138 : 0);
   const timerRef = useRef(null);
 
   const animateFrames = (towardDark) => {
