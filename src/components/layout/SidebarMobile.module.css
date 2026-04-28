@@ -95,15 +95,15 @@
 
 @media (max-width: 400px) {
   .avatar {
-    width: 160px;
-    height: 160px;
+    width: 155px;
+    height: 155px;
   }
 
   .name {
     font-size: 1.28rem;
     white-space: normal;
     word-break: break-word;
-    margin-bottom: 5px;
+    margin-bottom: 9px;
   }
 
   .title-wrapper {
@@ -111,11 +111,12 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 5px;
+    margin-bottom: 1px;
     /* easiest approach — no need for :not(:last-child) */
   }
 
   .title {
-    font-size: .92rem;
+    font-size: .9rem;
     white-space: normal;
     word-break: break-word;
     margin-top: -9px;
@@ -126,8 +127,7 @@
   }
 
   .location {
-    font-size: 0.82rem;
-    margin-top: 2px;
+    font-size: 0.75rem;
   }
 
   .link {
