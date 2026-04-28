@@ -27,7 +27,6 @@ section {
 
 #about .item {
   padding: 20px 24px;
-  border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
   transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -35,7 +34,6 @@ section {
 }
 
 #about .item:hover {
-  border-color: var(--text-sec);
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
@@ -452,7 +450,6 @@ body.dark .cert-thumb {
 #education .timeline {
   position: relative;
   padding-left: 24px;
-  border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -461,7 +458,6 @@ body.dark .cert-thumb {
 #education .item {
   position: relative;
   padding: 20px 24px;
-  border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
   transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -488,7 +484,6 @@ body.dark #education .item:hover {
   height: 9px;
   border-radius: 50%;
   background-color: var(--bg);
-  border: 1px solid var(--text-sec);
   transition: background-color 0.25s ease;
 }
 
@@ -535,7 +530,6 @@ body.dark #education .item:hover {
 
 #projects .item {
   padding: 24px;
-  border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--bg);
   transition: background-color 1.5s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
@@ -597,7 +591,6 @@ body.dark #projects .item:hover {
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  border: 1px solid var(--border);
   border-radius: 20px;
   background-color: var(--bg);
   transition: all 0.3s ease;
@@ -637,7 +630,6 @@ body.dark #skills .pill:hover .icon {
 
 #recommendations .quote {
   padding: 24px 24px 24px 28px;
-  border: 1px solid var(--border);
   border-left: 3px solid var(--text-sec);
   border-radius: 10px;
   background: var(--bg);
