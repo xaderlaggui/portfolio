@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useInView } from '../../hooks/useInView';
 
 const CERTIFICATES = [
@@ -39,195 +39,28 @@ const CERTIFICATES = [
   },
 ];
 
-const AUTO_SCROLL_INTERVAL = 1500;
-
-/* ── How many cards are visible at each breakpoint ── */
-function getVisibleCount() {
-  if (typeof window === 'undefined') return 3;
-  if (window.innerWidth <= 600) return 1;
-  if (window.innerWidth <= 900) return 2;
-  return 3;
-}
-
 /*
- * Infinite-loop strategy: clone buffer
- *   - Prepend clones of the last N real cards  (tail clones)
- *   - Append  clones of the first N real cards (head clones)
- *   - Start visual position at real card[0]
- *   - After animating into a clone zone, instantly jump to the mirror real card
+ * Marquee-based infinite carousel.
+ * The track contains [real cards] + [duplicated real cards].
+ * CSS animates translateX from 0 → -50% (exactly one full set width),
+ * then loops — seamless, no JS timers needed.
+ * Hovering pauses via animation-play-state.
  */
 
 export default function Certifications() {
   const { ref, inView } = useInView();
 
-  const total = CERTIFICATES.length;
-
-  /* ── visible count (responsive) ── */
-  const [visibleCount, setVisibleCount] = useState(getVisibleCount);
-
-  /* ── currentIndex: index among real cards (0-based) ── */
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  /* ── isAnimating: controls CSS transition class ── */
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  /* ── inTransition: blocks new slides until transitionend ── */
-  const inTransition = useRef(false);
-
-  /* ── track ref for transitionend ── */
-  const trackRef = useRef(null);
-
   /* ── modal state ── */
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  /* ── hover (pauses auto-scroll) ── */
-  const [isHovered, setIsHovered] = useState(false);
+  const total = CERTIFICATES.length;
 
-  /* ── drag ── */
-  const dragStartX = useRef(null);
-  const dragCurrentX = useRef(null);
-  const [dragOffset, setDragOffset] = useState(0);
-  const isDragging = useRef(false);
+  /* Duplicate cards for the seamless loop */
+  const marqueeItems = [...CERTIFICATES, ...CERTIFICATES];
 
-  /* ── auto-scroll ── */
-  const intervalRef = useRef(null);
-
-  /* ════════════════════════════════
-     Build cloned items array
-  ════════════════════════════════ */
-  // tailClones = last N real items   (prepended)
-  // headClones = first N real items  (appended)
-  const tailClones = CERTIFICATES.slice(-visibleCount);
-  const headClones = CERTIFICATES.slice(0, visibleCount);
-  const allItems = [...tailClones, ...CERTIFICATES, ...headClones];
-
-  /* ════════════════════════════════
-     translateX calculation
-     Visual position = -(visibleCount + currentIndex) * cardWidthPct
-  ════════════════════════════════ */
-  const cardWidthPct = 100 / visibleCount;
-  const baseOffset = -(visibleCount + currentIndex) * cardWidthPct;
-  const translateX = baseOffset + (dragOffset / (trackRef.current?.offsetWidth || 1)) * 100 * visibleCount;
-
-  /* ════════════════════════════════
-     Slide function
-  ════════════════════════════════ */
-  const slide = useCallback((dir) => {
-    if (inTransition.current) return;
-    inTransition.current = true;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => prev + dir);
-  }, []);
-
-  const next = useCallback(() => slide(1), [slide]);
-  const prev = useCallback(() => slide(-1), [slide]);
-
-  /* ════════════════════════════════
-     transitionend → infinite jump
-  ════════════════════════════════ */
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const handleTransitionEnd = () => {
-      setIsAnimating(false);
-
-      setCurrentIndex((prev) => {
-        // Jumped past the end → jump to real start
-        if (prev >= total) return prev - total;
-        // Jumped before the start → jump to real end
-        if (prev < 0) return prev + total;
-        return prev;
-      });
-
-      inTransition.current = false;
-    };
-
-    track.addEventListener('transitionend', handleTransitionEnd);
-    return () => track.removeEventListener('transitionend', handleTransitionEnd);
-  }, [total]);
-
-  /* ════════════════════════════════
-     Auto-scroll
-  ════════════════════════════════ */
-  const startAutoScroll = useCallback(() => {
-    clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(next, AUTO_SCROLL_INTERVAL);
-  }, [next]);
-
-  const stopAutoScroll = useCallback(() => clearInterval(intervalRef.current), []);
-
-  useEffect(() => {
-    if (!isHovered && !modalOpen) startAutoScroll();
-    else stopAutoScroll();
-    return stopAutoScroll;
-  }, [isHovered, modalOpen, startAutoScroll, stopAutoScroll]);
-
-  /* ════════════════════════════════
-     goTo (dot click) – jump directly
-  ════════════════════════════════ */
-  const goTo = useCallback((index) => {
-    if (inTransition.current) return;
-    inTransition.current = true;
-    setIsAnimating(true);
-    setCurrentIndex(index);
-    // Short timeout for the animation, then unlock
-    setTimeout(() => {
-      inTransition.current = false;
-      setIsAnimating(false);
-    }, 450);
-  }, []);
-
-  /* ════════════════════════════════
-     Drag / swipe
-  ════════════════════════════════ */
-  const handleDragStart = (e) => {
-    if (inTransition.current) return;
-    isDragging.current = true;
-    dragStartX.current = e.touches ? e.touches[0].clientX : e.clientX;
-    dragCurrentX.current = dragStartX.current;
-    stopAutoScroll();
-  };
-
-  const handleDragMove = (e) => {
-    if (!isDragging.current) return;
-    const x = e.touches ? e.touches[0].clientX : e.clientX;
-    dragCurrentX.current = x;
-    setDragOffset(x - dragStartX.current);
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const delta = dragCurrentX.current - dragStartX.current;
-    setDragOffset(0);
-
-    if (Math.abs(delta) > 50) {
-      delta < 0 ? next() : prev();
-    }
-
-    if (!isHovered && !modalOpen) startAutoScroll();
-  };
-
-  /* ════════════════════════════════
-     Responsive resize
-  ════════════════════════════════ */
-  useEffect(() => {
-    const onResize = () => {
-      const newVisible = getVisibleCount();
-      setVisibleCount((prev) => {
-        if (prev !== newVisible) return newVisible;
-        return prev;
-      });
-    };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  /* ════════════════════════════════
-     Modal keyboard nav
-  ════════════════════════════════ */
+  /* ── modal keyboard nav ── */
   useEffect(() => {
     if (!modalOpen) return;
     const handleKey = (e) => {
@@ -244,15 +77,13 @@ export default function Certifications() {
     return () => { document.body.style.overflow = ''; };
   }, [modalOpen]);
 
-  const openModal = (index) => { setModalIndex(index); setModalOpen(true); };
+  const openModal = (index) => {
+    /* index may be from duplicated set — clamp to real range */
+    setModalIndex(index % total);
+    setModalOpen(true);
+  };
   const closeModal = () => setModalOpen(false);
 
-  /* ── real currentIndex (clamped for dot display) ── */
-  const displayIndex = ((currentIndex % total) + total) % total;
-
-  /* ════════════════════════════════
-     RENDER
-  ════════════════════════════════ */
   return (
     <>
       <section
@@ -262,86 +93,65 @@ export default function Certifications() {
       >
         <h2 className="sectionTitle">Certifications &amp; Workshops</h2>
 
+        {/* ── Marquee wrapper ── */}
         <div
-          className="cert-carousel-wrapper"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => { setIsHovered(false); handleDragEnd(); }}
-          onMouseDown={handleDragStart}
-          onMouseMove={handleDragMove}
-          onMouseUp={handleDragEnd}
-          onTouchStart={handleDragStart}
-          onTouchMove={handleDragMove}
-          onTouchEnd={handleDragEnd}
+          className="cert-marquee-outer"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
         >
-          {/* Track */}
           <div
-            ref={trackRef}
-            className={`cert-track${isAnimating ? ' is-animating' : ''}`}
-            style={{ transform: `translateX(${translateX}%)` }}
+            className="cert-marquee-track"
+            style={{ animationPlayState: paused || modalOpen ? 'paused' : 'running' }}
           >
-            {allItems.map((cert, i) => {
-              // Real card index (clones don't have one, so we pick the closest real)
-              const realIndex = i - visibleCount;
-              const clampedReal = ((realIndex % total) + total) % total;
-
-              return (
-                <div
-                  key={`${cert.id}-${i}`}
-                  className={`cert-card stagger-item ${inView ? 'active' : ''}`}
-                  style={{
-                    transitionDelay: `${Math.max(0, realIndex) * 80}ms`,
-                    flex: `0 0 ${cardWidthPct}%`,
-                  }}
-                  onClick={() => openModal(clampedReal)}
-                  role="button"
-                  tabIndex={i >= visibleCount && i < visibleCount + total ? 0 : -1}
-                  aria-label={`View ${cert.title} certificate`}
-                  aria-hidden={i < visibleCount || i >= visibleCount + total}
-                  onKeyDown={(e) => e.key === 'Enter' && openModal(clampedReal)}
-                >
-                  <div className="cert-thumb">
-                    <iframe
-                      src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&view=FitH`}
-                      title={`${cert.title} preview`}
-                      className="cert-thumb-iframe"
-                      tabIndex={-1}
-                      loading="lazy"
-                    />
-                    <div className="cert-thumb-overlay">
-                      <span className="cert-thumb-icon">⊕</span>
-                    </div>
-                  </div>
-                  <div className="cert-info">
-                    <p className="cert-issuer">{cert.issuer}</p>
-                    <h4 className="cert-title">{cert.title}</h4>
-                    <p className="cert-date">{cert.date}</p>
+            {marqueeItems.map((cert, i) => (
+              <div
+                key={`${cert.id}-${i}`}
+                className={`cert-card stagger-item ${inView ? 'active' : ''}`}
+                style={{ transitionDelay: `${(i % total) * 80}ms` }}
+                onClick={() => openModal(i)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${cert.title} certificate`}
+                onKeyDown={(e) => e.key === 'Enter' && openModal(i)}
+              >
+                <div className="cert-thumb">
+                  <iframe
+                    src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&view=FitH`}
+                    title={`${cert.title} preview`}
+                    className="cert-thumb-iframe"
+                    tabIndex={-1}
+                    loading="lazy"
+                  />
+                  <div className="cert-thumb-overlay">
+                    <span className="cert-thumb-icon">⊕</span>
                   </div>
                 </div>
-              );
-            })}
+                <div className="cert-info">
+                  <p className="cert-issuer">{cert.issuer}</p>
+                  <h4 className="cert-title">{cert.title}</h4>
+                  <p className="cert-date">{cert.date}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Controls */}
+        {/* Dot indicators — still useful for context */}
         <div className="cert-controls">
-          <button className="cert-arrow cert-arrow--prev" onClick={prev} aria-label="Previous certificate">←</button>
-
           <div className="cert-dots">
             {CERTIFICATES.map((_, i) => (
               <button
                 key={i}
-                className={`cert-dot ${i === displayIndex ? 'cert-dot--active' : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Go to certificate ${i + 1}`}
+                className="cert-dot"
+                onClick={() => openModal(i)}
+                aria-label={`Open certificate ${i + 1}`}
               />
             ))}
           </div>
-
-          <button className="cert-arrow cert-arrow--next" onClick={next} aria-label="Next certificate">→</button>
         </div>
       </section>
 
-      {/* Modal */}
+      {/* ── Modal ── */}
       {modalOpen && (
         <div
           className="cert-modal-backdrop"
@@ -351,7 +161,6 @@ export default function Certifications() {
           aria-label="Certificate viewer"
         >
           <div className="cert-modal">
-            {/* Header: prev arrow · issuer + title · next arrow · close */}
             <div className="cert-modal-header">
               <button
                 className="cert-modal-nav"
@@ -377,7 +186,6 @@ export default function Certifications() {
               <button className="cert-modal-close" onClick={closeModal} aria-label="Close modal">✕</button>
             </div>
 
-            {/* PDF — fills all remaining height, no browser toolbars */}
             <div className="cert-modal-body">
               <iframe
                 key={modalIndex}

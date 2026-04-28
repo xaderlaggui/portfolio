@@ -34,40 +34,38 @@ section {
    INFINITE CAROUSEL
    ========================================= */
 
-/* Carousel wrapper – clips the sliding track */
-.cert-carousel-wrapper {
+/* ── Marquee keyframe (from @theme inline) ── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ── Outer wrapper: clips track + edge fade ── */
+.cert-marquee-outer {
   overflow: hidden;
   width: 100%;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: pan-y pinch-zoom;
+  cursor: pointer;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-.cert-carousel-wrapper:active {
-  cursor: grabbing;
-}
-
-/*
-  Sliding track.
-  JS drives transform directly for infinite looping.
-  The .is-animating class is toggled on/off by JS:
-    - ON  when doing an animated slide
-    - OFF when doing an instant "jump" for the infinite loop reset
-*/
-.cert-track {
+/* ── Scrolling track ── */
+.cert-marquee-track {
   display: flex;
+  width: max-content;
   gap: 0;
+  animation: marquee var(--cert-marquee-duration, 28s) linear infinite;
   will-change: transform;
-}
-
-.cert-track.is-animating {
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Individual card */
 .cert-card {
-  flex: 0 0 calc(100% / 3);
+  flex: 0 0 300px;
   padding: 0 12px;
   cursor: pointer;
   outline: none;
@@ -83,7 +81,7 @@ section {
 .cert-thumb {
   position: relative;
   width: 100%;
-  height: 145px;
+  height: 220px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -362,17 +360,25 @@ body.dark .cert-thumb {
   background-color: #111;
 }
 
-/* Tablet: 2 cards */
+/* Tablet: smaller cards */
 @media (max-width: 900px) {
   .cert-card {
-    flex: 0 0 50%;
+    flex: 0 0 240px;
+  }
+
+  .cert-marquee-track {
+    --cert-marquee-duration: 22s;
   }
 }
 
-/* Mobile: 1 card */
+/* Mobile: single card width */
 @media (max-width: 600px) {
   .cert-card {
-    flex: 0 0 100%;
+    flex: 0 0 200px;
+  }
+
+  .cert-marquee-track {
+    --cert-marquee-duration: 18s;
   }
 
   .cert-modal {
