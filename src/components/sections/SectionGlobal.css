@@ -54,15 +54,14 @@ body.dark #about .item:hover {
    INFINITE CAROUSEL
    ========================================= */
 
-/* ── Marquee keyframe (from @theme inline) ── */
+/* ── Marquee keyframe ── */
+@-webkit-keyframes marquee {
+  from { -webkit-transform: translateX(0); transform: translateX(0); }
+  to   { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+}
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* ── Outer wrapper: clips track + edge fade ── */
@@ -70,6 +69,9 @@ body.dark #about .item:hover {
   overflow: hidden;
   width: 100%;
   cursor: pointer;
+  /* isolate compositing layer so iOS Safari doesn't drop children */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
@@ -79,8 +81,13 @@ body.dark #about .item:hover {
   display: flex;
   width: max-content;
   gap: 0;
+  -webkit-animation: marquee var(--cert-marquee-duration, 28s) linear infinite;
   animation: marquee var(--cert-marquee-duration, 28s) linear infinite;
-  will-change: transform;
+  /* Use translateZ(0) instead of will-change — safer on iOS Safari */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Individual card */

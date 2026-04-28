@@ -7,8 +7,9 @@
   }
 
   .cert-marquee-outer {
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    /* Remove gradient mask on mobile — causes iOS Safari GPU layer drop */
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .cert-card {
