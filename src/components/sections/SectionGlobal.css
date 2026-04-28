@@ -56,12 +56,12 @@ body.dark #about .item:hover {
 
 /* ── Marquee keyframe ── */
 @-webkit-keyframes marquee {
-  from { -webkit-transform: translateX(0); transform: translateX(0); }
-  to   { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+  from { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+  to   { -webkit-transform: translate3d(-50%, 0, 0); transform: translate3d(-50%, 0, 0); }
 }
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ── Outer wrapper: clips track + edge fade ── */
@@ -83,9 +83,7 @@ body.dark #about .item:hover {
   gap: 0;
   -webkit-animation: marquee var(--cert-marquee-duration, 28s) linear infinite;
   animation: marquee var(--cert-marquee-duration, 28s) linear infinite;
-  /* Use translateZ(0) instead of will-change — safer on iOS Safari */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  /* translate3d in keyframes handles GPU compositing — no will-change needed */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

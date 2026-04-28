@@ -101,7 +101,10 @@ export default function Certifications() {
         >
           <div
             className="cert-marquee-track"
-            style={{ animationPlayState: paused || modalOpen ? 'paused' : 'running' }}
+            style={{
+              animationPlayState: paused || modalOpen ? 'paused' : 'running',
+              WebkitAnimationPlayState: paused || modalOpen ? 'paused' : 'running',
+            }}
           >
             {marqueeItems.map((cert, i) => (
               <div
