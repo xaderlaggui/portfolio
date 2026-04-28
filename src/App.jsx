@@ -34,33 +34,17 @@ function App() {
     }
   }, [isDark]);
 
-  let preloadingStarted = false;
-  const preloadedImages = [];
+const preloadedImages = [];
 
   useEffect(() => {
-    if (preloadingStarted) return;
-    preloadingStarted = true;
-
-    const preloadSequentially = async () => {
-      // Small delay to prioritize initial page load
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+    if (preloadedImages.length === 0) {
       for (let i = 0; i <= 138; i++) {
-        await new Promise((resolve) => {
-          const img = new Image();
-          const padded = String(i).padStart(3, '0');
-          img.src = `/profile-frames/frame-${padded}.jpg`;
-
-          // Wait for each image to load before requesting the next
-          // This prevents Vercel from blocking concurrent requests
-          img.onload = resolve;
-          img.onerror = resolve; // Continue even if one fails
-          preloadedImages.push(img);
-        });
+        const img = new Image();
+        const padded = String(i).padStart(3, '0');
+        img.src = `/profile-frames/frame-${padded}.jpg`;
+        preloadedImages.push(img);
       }
-    };
-
-    preloadSequentially();
+    }
   }, []);
 
   const toggleDark = () => {
