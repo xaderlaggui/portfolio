@@ -139,6 +139,52 @@
   }
 }
 
+@media (max-width: 391px) {
+  .avatar {
+    width: 155px;
+    height: 155px;
+  }
+
+  .name {
+    font-size: 1.28rem;
+    white-space: normal;
+    word-break: break-word;
+    margin-bottom: 10px;
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1px;
+    /* easiest approach — no need for :not(:last-child) */
+  }
+
+  .title {
+    font-size: .9rem;
+    white-space: normal;
+    word-break: break-word;
+    margin-top: -9px;
+  }
+
+  .title:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  .location {
+    font-size: 0.67rem;
+  }
+
+  .link {
+    font-size: 0.67rem;
+  }
+
+  .contactLinks {
+    gap: 4px;
+  }
+}
+
 @media (max-width: 380px) {
   .avatar {
     width: 150px;
