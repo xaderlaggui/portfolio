@@ -40,21 +40,35 @@
   .name {
     font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 0px;
+    margin-bottom: 4px;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
     word-break: break-word;
   }
 
+  .title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: -5px;
+    margin-bottom: 4px;
+    /* easiest approach — no need for :not(:last-child) */
+  }
+
   .title {
-    font-size: 0.8rem;
+    font-size: .9rem;
     font-weight: 500;
     margin-bottom: 0px;
     white-space: normal;
     overflow: visible;
     text-overflow: unset;
     word-break: break-word;
+    margin-top: -3px;
+  }
+
+  .title:not(:last-child) {
+    margin-right: 12px;
   }
 
   .location {
@@ -125,7 +139,7 @@
   }
 }
 
-@media (max-width: 370px) {
+@media (max-width: 380px) {
   .avatar {
     width: 150px;
     height: 150px;
