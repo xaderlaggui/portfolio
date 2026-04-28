@@ -34,6 +34,15 @@ function App() {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    // Preload all frames into browser cache on mount
+    for (let i = 0; i <= 138; i++) {
+      const img = new Image();
+      const padded = String(i).padStart(3, '0');
+      img.src = `/profile-frames/frame-${padded}.jpg`;
+    }
+  }, []);
+
   const toggleDark = () => {
     setIsDark(prev => !prev);
   };
